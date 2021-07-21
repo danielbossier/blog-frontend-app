@@ -1,5 +1,5 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <h1>And I just keep grooving, cant stop, wont stop moving.</h1>
   </div>
 </template>
