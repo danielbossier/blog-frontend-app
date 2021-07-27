@@ -1,5 +1,6 @@
 <template>
   <div class="newpost">
+    <img v-if="status" :src="`https://http.cat/${status}`" />
     <form v-on:submit.prevent="createPost()">
       <h1>Create Post</h1>
       <ul>
@@ -32,16 +33,22 @@ export default {
       posts: [],
       newPostParams: {},
       errors: [],
+      status: "",
     };
   },
   created: function () {},
 
   methods: {
     createPost: function () {
-      axios.post("/posts", this.newPostParams).then((response) => {
-        this.$router.push("/posts");
-        console.log(response.data);
-      });
+      axios
+        .post("/posts", this.newPostParams)
+        .then((response) => {
+          this.$router.push("/posts");
+          console.log(response.data);
+        })
+        .catch((error) => {
+          this.status = error.response.status;
+        });
     },
   },
 };
