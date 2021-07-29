@@ -5,8 +5,9 @@
       <p>{{ post.body }}</p>
       <img v-bind:src="post.image" alt="post.title" />
       <br />
-      <router-link v-bind:to="`/posts/${post.id}/edit`"><button>Edit Post</button></router-link>
-      <br />
+      <li v-if="$parent.getUserID() == post.user_id">
+        <router-link v-bind:to="`/posts/${post.id}/edit`"><button>Edit Post</button></router-link>
+      </li>
       <router-link to="/posts">Back to all posts.</router-link>
     </div>
   </div>

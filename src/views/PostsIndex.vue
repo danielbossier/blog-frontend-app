@@ -14,28 +14,35 @@
             <p class="card-text">Body: {{ post.body }}</p>
             <p class="card-text"><small class="text-muted"></small></p>
           </div>
+
+          <!-- <router-link v-bind:to="`/posts/${post.id}`">
+            <h2>Title: {{ post.title }}</h2>
+            <p>Body: {{ post.body }}</p>
+            <img v-bind:src="post.image" alt="post.title" />
+          </router-link> -->
         </div>
       </div>
-
-      <router-link v-bind:to="`/posts/${post.id}`">
-        <h2>Title: {{ post.title }}</h2>
-        <p>Body: {{ post.body }}</p>
-        <img v-bind:src="post.image" alt="post.title" />
-      </router-link>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style>
 .card {
   width: 50%;
+}
+body {
+  color: green !important;
 }
 </style>
 
 <script>
+import Vue2Filters from "vue2-filters";
+
 import axios from "axios";
 
 export default {
+  mixins: [Vue2Filters.mixin],
+
   data: function () {
     return {
       message: "Here are all the Posts!",
@@ -48,7 +55,7 @@ export default {
   },
   methods: {
     indexPosts: function () {
-      axios.get("http://localhost:3000/posts").then((response) => {
+      axios.get("/posts").then((response) => {
         this.posts = response.data;
         console.log("All posts:", this.posts);
       });
